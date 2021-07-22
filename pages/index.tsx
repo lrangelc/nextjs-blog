@@ -4,17 +4,26 @@ import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
 import Date from '../components/date';
+import { GetStaticProps } from 'next';
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
 
-export default function Home({ allPostsData }) {
+export default function Home({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) {
   return (
     <Layout home>
       <Head>
@@ -27,7 +36,7 @@ export default function Home({ allPostsData }) {
         </p>
         <p>
           <a href='https://www.twitter.com/luis_rangel_c' target='_blank'>
-            <img align='left' alt="Luis's Twitter" width='22px' src='https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg' />
+            <img alt="Luis's Twitter" width='22px' src='https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg' />
             @luis_rangel_c
           </a>
         </p>
